@@ -265,7 +265,7 @@ Sử dụng cookies hợp lệ: Mã khai thác sẽ gửi một cookie ngẫu nh
 
 Sử dụng session: Gửi yêu cầu đăng nhập hợp lệ để lấy cookies, và sau đó tiếp tục gửi yêu cầu tải lên mà không bị yêu cầu đăng nhập lại.
 
-Tuy nhiên, như em đã giải thích trước, việc này không hoàn toàn phù hợp với mô tả của CVE, vì CVE này mô tả lỗ hổng không yêu cầu xác thực và bypass được xác thực để tải tệp lên. Nếu anh muốn khắc phục vấn đề này theo đúng mô tả CVE, chúng ta sẽ cần kiểm tra lại cấu hình plugin hoặc cấu hình của WordPress.
+Tuy nhiên, như đã giải thích trước, việc này không hoàn toàn phù hợp với mô tả của CVE, vì CVE này mô tả lỗ hổng không yêu cầu xác thực và bypass được xác thực để tải tệp lên. Nếu muốn khắc phục vấn đề này theo đúng mô tả CVE, chúng ta sẽ cần kiểm tra lại cấu hình plugin hoặc cấu hình của WordPress.
 
 Tóm tắt:
 Đường dẫn /wp-admin/options-general.php?page=licence được sử dụng để xử lý việc tải lên tệp qua giao diện quản trị.
