@@ -40,6 +40,7 @@ Thank you, Dr. Vu Thanh Nam, for helping me develop this project.
    Cách xử lý lỗi để hiển thị trang cài đặt WordPress:
    
    Bước 1: Xóa file mặc định index.html: sudo rm /var/www/html/index.html, File này đang "chắn đường" WordPress, nên Apache hiển thị nó thay vì WordPress index.php.
+   
    Bước 2: Kiểm tra thư mục chứa WordPress:
    Nếu bạn chạy: ls /var/www/html/
    Bạn nên thấy:
@@ -48,10 +49,12 @@ Thank you, Dr. Vu Thanh Nam, for helping me develop this project.
    sudo mv /var/www/html/wordpress/_ /var/www/html/
    sudo mv /var/www/html/wordpress/._ /var/www/html/ 2>/dev/null
    sudo rmdir /var/www/html/wordpress/
+   
    Bước 3: Cấp quyền lại cho Apache
    sudo chown -R www-data:www-data /var/www/html/
    sudo find /var/www/html/ -type d -exec chmod 755 {} \;
    sudo find /var/www/html/ -type f -exec chmod 644 {} \;
+   
    Bước 4: Khởi động lại Apache
    sudo systemctl restart apache2
    Bước 5: Truy cập lại trình duyệt
@@ -139,14 +142,18 @@ Tự động xóa chính nó sau khi chạy xong
 
 Trong mã khai thác mà đang sử dụng, đường dẫn /wp-admin/options-general.php?page=licence được sử dụng để tải tệp lên thông qua một form trong trang quản trị của WordPress. Tuy nhiên, WordPress yêu cầu đăng nhập trước khi cho phép truy cập vào trang quản trị này, và do đó lỗi yêu cầu trang đăng nhập xảy ra. Điều này có thể xử lý bằng đăng nhập với các cookie sinh ra bằng các hàm ngẫu nhiên nhằm vượt qua xác thực.
 Mặc dù mô tả trong CVE-2024-51788 có nói rằng lỗ hổng cho phép không cần xác thực để tải lên tệp, lỗi xác thực không đúng có thể xảy ra trong plugin hoặc cấu hình của hệ thống, khiến khi gửi yêu cầu tới /wp-admin/options-general.php?page=licence WordPress vẫn yêu cầu đăng nhập.
+
 Lý do tại sao mã khai thác vẫn yêu cầu đăng nhập:
 Lỗi xác thực không đúng có thể có trong plugin hoặc trong WordPress. Cụ thể:
 Plugin không kiểm tra đúng quyền truy cập khi tải lên tệp. Có thể plugin đã cấu hình endpoint /wp-admin/options-general.php?page=licence mà không thực sự bỏ qua xác thực (hoặc bỏ qua kiểm tra quyền truy cập).
 WordPress mặc định yêu cầu đăng nhập vào admin trước khi có thể truy cập vào các trang quản trị (bao gồm trang cấu hình của plugin).
+
 Cách khắc phục: Sửa mã khai thác
 Để bỏ qua yêu cầu đăng nhập, bạn sẽ cần phải đăng nhập tự động hoặc tắt yêu cầu đăng nhập nếu có vấn đề với plugin hoặc WordPress.
+
 Xử lý đăng nhập tự động:
 Như đã đề cập trong các bước trước, có thể sử dụng cookies hợp lệ hoặc đăng nhập tự động vào WordPress để bỏ qua trang login.
+
 Giải pháp tạm thời:
 Mục đích là để bypass (vượt qua) trang đăng nhập mà không cần thực sự đăng nhập thủ công. Điều này có thể được thực hiện bằng cách:
 Sử dụng cookies hợp lệ: Mã khai thác sẽ gửi một cookie ngẫu nhiên hoặc giả mạo một người dùng đã đăng nhập.
