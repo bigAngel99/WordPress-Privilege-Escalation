@@ -38,6 +38,7 @@ Thank you, Dr. Vu Thanh Nam, for helping me develop this project.
    Nguyên nhân: Trang Apache mặc định vẫn tồn tại trong /var/www/html/ chứa file: /var/www/html/index.html
    Trong khi WordPress nằm ở: /var/www/html/wordpress/ hoặc /var/www/html/ (nếu bạn đã move toàn bộ)
    Cách xử lý lỗi để hiển thị trang cài đặt WordPress:
+   
    Bước 1: Xóa file mặc định index.html: sudo rm /var/www/html/index.html, File này đang "chắn đường" WordPress, nên Apache hiển thị nó thay vì WordPress index.php.
    Bước 2: Kiểm tra thư mục chứa WordPress:
    Nếu bạn chạy: ls /var/www/html/
